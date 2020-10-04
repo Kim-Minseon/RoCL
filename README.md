@@ -27,7 +27,7 @@ python -m torch.distributed.launch --nproc_per_node=2 rocl_train.py --ngpu 2 --b
 
 ## Evaluation
 
-To evaluate my model on ImageNet, run:
+To evaluate my model linear evaluation and robustness, run:
 
 ```eval
 ./total_process.sh test <checkpoint-load> <name> <model type='ResNet18' or 'ResNet50'> <learning rate=0.1> <dataset='cifar-10' or 'cifar-100'>
