@@ -149,7 +149,7 @@ class RepresentationAdv():
                 elif self.loss_type == 'l1':
                     loss = F.l1_loss(self.projector(self.model(x)), self.projector(self.model(target)))
                 elif self.loss_type =='cos':
-                    loss = F.cosine_similarity(self.projector(self.model(x)), self.projector(self.model(target))).mean()
+                    loss = -F.cosine_similarity(self.projector(self.model(x)), self.projector(self.model(target))).mean()
 
                 grads = torch.autograd.grad(loss, x, grad_outputs=None, only_inputs=True, retain_graph=False)[0]
 
@@ -178,6 +178,6 @@ class RepresentationAdv():
         elif self.loss_type == 'l1':
             loss = F.l1_loss(self.projector(self.model(x)), self.projector(self.model(target))) * (1.0/batch_size)
         elif self.loss_type == 'cos':
-            loss = F.cosine_similarity(self.projector(self.model(x)), self.projector(self.model(target))).sum() * (1.0/batch_size)
+            loss = -F.cosine_similarity(self.projector(self.model(x)), self.projector(self.model(target))).sum() * (1.0/batch_size)
 
         return x.detach(), loss
